@@ -1,0 +1,20 @@
+Package: latterdaysaints
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.1
+Authors@R: 
+    person(given = "J.",
+           family = "Hathaway",
+           role = c("aut", "cre"),
+           email = "j@jhathaway.io")
+Description: Functions and data related to the lds.org website and the standard works of The Church of Jesus Christ of Latter-Day Saints.
+License: What license it uses
+Depends: R (>= 3.5.0)
+Encoding: UTF-8
+LazyData: true
+Imports:
+  dplyr,
+  stringr,
+  tidyr,
+  purrr,
+  rvest
+RoxygenNote: 6.1.1
