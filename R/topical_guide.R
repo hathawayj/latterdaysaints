@@ -3,6 +3,7 @@
 # http://r-pkgs.had.co.nz/description.html
 # https://gohugo.io/content-management/shortcodes/
 # http://blog.tonytsai.name/blog/2017-12-04-detecting-non-breaking-space-in-r/
+# https://cryptii.com/pipes/hex-to-text
 
 tg_website <- "https://www.lds.org/scriptures/tg/"
 
