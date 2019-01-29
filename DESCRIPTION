@@ -16,5 +16,7 @@ Imports:
   stringr,
   tidyr,
   purrr,
+  fs,
+  DT,
   rvest
 RoxygenNote: 6.1.1

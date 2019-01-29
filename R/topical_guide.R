@@ -126,6 +126,58 @@ lds_expand_reference <- function(reference = "1 Ne. 8:14–15, 18"){
 
 }
 
+
+#' @title lds_scripture_url
+#' @description Function creates url link to verse on lds.org
+#' @param reference a specific scripture reference, or string of references, as a character string. Requires use of the `verse_short_title`
+#' @param text_link A boolean that identifies if the output should be an html text link.
+#' @example lds_scripture_url("1 Ne. 8:14–15, 18"); lds_scripture_url("1 Ne. 8:14–15, 18", FALSE)
+#' @return a character string that is a url or text url.
+#' @export
+lds_scripture_url <- function(references, text_link = TRUE){
+
+  lds_base_url <- "https://www.lds.org/scriptures"
+
+  verse_table <- str_split_fixed(references, ":", n = 2) %>% as.tibble()
+  colnames(verse_table) <- c("chapter", "verse")
+
+  verse_table <- verse_table %>%
+    mutate(book = str_remove_all(references, "[[:digit:]]+:[[:print:]]+") %>% str_trim(),
+           chapter = str_remove_all(chapter, str_c(book, collapse = "|")) %>% str_trim(),
+           verse = str_replace_all(verse, "–", "-")) %>%
+    select(book, chapter, verse)
+
+  verse_short_titles <- str_split(references, ",|–|-") %>% map( ~ head(.x, 1)) %>% unlist()
+
+  url_verses <- scriptures %>% filter(verse_short_title %in% verse_short_titles)
+
+  out <- path(lds_base_url, url_verses$volume_lds_url, url_verses$book_lds_url,
+       str_c(url_verses$chapter_number, verse_table$verse, sep = ".") )
+
+  if(text_link)  out <- str_c('<a href="',out,'">',references ,'</a>')
+
+  out
+}
+
+#' @title lds_datatable
+#' @description Creates a DT::datatable object for a specific lds topic.
+#' @param x The output from `lds_topic()`
+#' @example lds_datatable(lds_topic("God, Omniscience of"))
+#' @return a datatable from the library DT
+#' @export
+lds_datatable <- function(x){
+
+  dat <- x %>%
+    mutate(full_text = x$reference %>% map(~lds_expand_reference(.x)) %>% unlist()) %>%
+    slice(-c(1:3)) %>%
+    mutate(reference_url = lds_scripture_url(reference)) %>%
+    select(Reference = reference_url, Summary = text_summary, Text = full_text)
+
+  DT::datatable(dat , rownames = FALSE, extensions = c('Responsive','Buttons'), options = list(
+    dom = 'ltripB', buttons = c('copy', 'csv', 'excel', 'pdf', 'print'), lengthMenu = c(5, 10, 20, 100)), filter = "top", escape = FALSE)
+}
+
+
 # scriptures <- read_csv("https://raw.githubusercontent.com/byuistats/M335/master/docs/data/lds-scriptures.csv?token=AF6YxPyvmohk2lj5cCXWUdE9zmoY8UTvks5cV0lgwA%3D%3D")
 #
 # usethis::use_data(scriptures)

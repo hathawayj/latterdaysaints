@@ -16,5 +16,5 @@ a tibble with five columns - verse reference from the web, book, reference, text
 Function retrieves the verses of specific topic from the topical guide on lds.org
 }
 \details{
-the reference column matches the values in `scriptures$verse_short_title``
+the reference column matches the values in `scriptures$verse_short_title`
 }
