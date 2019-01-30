@@ -144,15 +144,14 @@ lds_scripture_url <- function(references, text_link = TRUE){
   verse_table <- verse_table %>%
     mutate(book = str_remove_all(references, "[[:digit:]]+:[[:print:]]+") %>% str_trim(),
            chapter = str_remove_all(chapter, str_c(book, collapse = "|")) %>% str_trim(),
-           verse = str_replace_all(verse, "–", "-")) %>%
-    select(book, chapter, verse)
+           verse = str_replace_all(verse, "–", "-"),
+           reference = references) %>%
+    select(book, chapter, verse, reference) %>%
+    mutate(verse_short_title = str_split(reference, ",|–|-") %>% map( ~ head(.x, 1)) %>% unlist()) %>%
+    left_join(scriptures)
 
-  verse_short_titles <- str_split(references, ",|–|-") %>% map( ~ head(.x, 1)) %>% unlist()
-
-  url_verses <- scriptures %>% filter(verse_short_title %in% verse_short_titles)
-
-  out <- path(lds_base_url, url_verses$volume_lds_url, url_verses$book_lds_url,
-       str_c(url_verses$chapter_number, verse_table$verse, sep = ".") )
+  out <- path(lds_base_url, verse_table$volume_lds_url, verse_table$book_lds_url,
+       str_c(verse_table$chapter_number, verse_table$verse, sep = ".") )
 
   if(text_link)  out <- str_c('<a href="',out,'">',references ,'</a>')
 
@@ -178,6 +177,7 @@ lds_datatable <- function(x){
 }
 
 
-# scriptures <- read_csv("https://raw.githubusercontent.com/byuistats/M335/master/docs/data/lds-scriptures.csv?token=AF6YxPyvmohk2lj5cCXWUdE9zmoY8UTvks5cV0lgwA%3D%3D")
+# scriptures <- read_csv("https://raw.githubusercontent.com/byuistats/M335/master/docs/data/lds-scriptures.csv?token=AF6YxPyvmohk2lj5cCXWUdE9zmoY8UTvks5cV0lgwA%3D%3D") %>%
+#   mutate(volume_lds_url = volume_lds_url %>% str_replace_all("bm", "bofm") %>% str_replace_all("dc", "dc-testament"))
 #
-# usethis::use_data(scriptures)
+#  usethis::use_data(scriptures, overwrite = TRUE)
