@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>lds_expand_reference — lds_expand_reference • latterdaysaints</title>
+<title>lds_verse_join — lds_verse_join • latterdaysaints</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="lds_expand_reference — lds_expand_reference" />
+<meta property="og:title" content="lds_verse_join — lds_verse_join" />
 
-<meta property="og:description" content="Function retrieves the verses of specific topic from the topical guide on lds.org" />
+<meta property="og:description" content="Function pulls the first `scriptures$verse_short_title` element for merging with `scriptures`." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -94,18 +94,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>lds_expand_reference</h1>
+    <h1>lds_verse_join</h1>
     
-    <div class="hidden name"><code>lds_expand_reference.Rd</code></div>
+    <div class="hidden name"><code>lds_verse_join.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Function retrieves the verses of specific topic from the topical guide on lds.org</p>
+    <p>Function pulls the first `scriptures$verse_short_title` element for merging with `scriptures`.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>lds_expand_reference</span>(<span class='kw'>reference</span> <span class='kw'>=</span> <span class='st'>"1 Ne. 8:14–15, 18"</span>)</pre>
+    <pre class="usage"><span class='fu'>lds_verse_join</span>(<span class='kw'>reference</span> <span class='kw'>=</span> <span class='st'>"1 Ne. 8:14–15, 18"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -118,15 +118,15 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a character string with all text from the input verses</p>
+    <p>a character string of the first short verse for merging.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function can handle `,`, `–`, or `-`. The `–` and `-` will pull all verses referenced.</p>
+    <p>The function can handle `,`, `–`, or `-`. The `–` and `-` will keep the first verse reference.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>lds_expand_reference</span>(<span class='st'>"1 Ne. 8:14–15, 18"</span>); <span class='fu'>lds_expand_reference</span>(<span class='st'>"1 Ne. 8:14-15, 18"</span>)</div><div class='output co'>#&gt; [1] "And I looked to behold from whence it came; and I saw the head thereof a little way off; and at the head thereof I beheld your mother Sariah, and Sam, and Nephi; and they stood as if they knew not whither they should go. And it came to pass that I beckoned unto them; and I also did say unto them with a loud voice that they should come unto me, and partake of the fruit, which was desirable above all other fruit. And it came to pass that I saw them, but they would not come unto me and partake of the fruit."</div><div class='output co'>#&gt; [1] "And I looked to behold from whence it came; and I saw the head thereof a little way off; and at the head thereof I beheld your mother Sariah, and Sam, and Nephi; and they stood as if they knew not whither they should go. And it came to pass that I beckoned unto them; and I also did say unto them with a loud voice that they should come unto me, and partake of the fruit, which was desirable above all other fruit. And it came to pass that I saw them, but they would not come unto me and partake of the fruit."</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>lds_verse_join</span>(<span class='st'>"1 Ne. 8:14–15, 18"</span>); <span class='fu'>lds_verse_join</span>(<span class='st'>"1 Ne. 8:14-15, 18"</span>); <span class='fu'>lds_verse_join</span>(<span class='st'>"2 Ne. 2:3,5"</span>)</div><div class='output co'>#&gt; [1] "1 Ne. 8:14"</div><div class='output co'>#&gt; [1] "1 Ne. 8:14"</div><div class='output co'>#&gt; [1] "2 Ne. 2:3"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -17,3 +17,6 @@ a character string that is a url or text url.
 \description{
 Function creates url link to verse on lds.org
 }
+\examples{
+lds_scripture_url("1 Ne. 8:14–15, 18"); lds_scripture_url("1 Ne. 8:14–15, 18", FALSE)
+}

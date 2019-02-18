@@ -10,7 +10,7 @@ tg_website <- "https://www.lds.org/scriptures/tg/"
 #' @title lds_topics
 #' @description Function retrieves the list of topics from the topical guide on lds.org
 #' @param letter a letter of the alphabet
-#' @example lds_topics("a")
+#' @examples lds_topics("a")
 #' @export
 lds_topics <- function(letter){
   letter <- str_to_lower(letter)
@@ -48,7 +48,7 @@ process_topics <- function(topics){
 #' @title lds_topic
 #' @description Function retrieves the verses of specific topic from the topical guide on lds.org
 #' @param topic a correctly named topic from the topical guide
-#' @example lds_topic("God, Omniscience of")
+#' @examples lds_topic("God, Omniscience of")
 #' @return a tibble with five columns - verse reference from the web, book, reference, text_summary, and full_text
 #' @details the reference column matches the values in `scriptures$verse_short_title`
 #' @export
@@ -86,12 +86,25 @@ lds_topic <- function(topic){
   return(final_tibble)
 }
 
+#' @title lds_verse_join
+#' @description Function pulls the first `scriptures$verse_short_title` element for merging with `scriptures`.
+#' @param reference a specific scripture reference as a character string. Should use the `verse_short_title`
+#' @examples lds_verse_join("1 Ne. 8:14–15, 18"); lds_verse_join("1 Ne. 8:14-15, 18"); lds_verse_join("2 Ne. 2:3,5")
+#' @return a character string of the first short verse for merging.
+#' @details The function can handle `,`, `–`, or `-`. The `–` and `-` will keep the first verse reference.
+#' @export
+lds_verse_join <- function(reference = "1 Ne. 8:14–15, 18"){
+  if( is.na(reference) ) return(NA)
+  reference %>% str_split(",|-|–") %>% map(head(1)) %>% unlist()
+}
+
+
 #' @title lds_expand_reference
 #' @description Function retrieves the verses of specific topic from the topical guide on lds.org
 #' @param reference a specific scripture reference as a character string. Should use the `verse_short_title`
-#' @example lds_expand_reference("1 Ne. 8:14–15, 18"); lds_expand_reference("1 Ne. 8:14-15, 18")
+#' @examples lds_expand_reference("1 Ne. 8:14–15, 18"); lds_expand_reference("1 Ne. 8:14-15, 18")
 #' @return a character string with all text from the input verses
-#' @details The function can handle `,`, `–`, or `-`. The `–` and `-` will pull all verses between the two numbers.
+#' @details The function can handle `,`, `–`, or `-`. The `–` and `-` will pull all verses referenced.
 #' @export
 lds_expand_reference <- function(reference = "1 Ne. 8:14–15, 18"){
 
@@ -131,7 +144,7 @@ lds_expand_reference <- function(reference = "1 Ne. 8:14–15, 18"){
 #' @description Function creates url link to verse on lds.org
 #' @param reference a specific scripture reference, or string of references, as a character string. Requires use of the `verse_short_title`
 #' @param text_link A boolean that identifies if the output should be an html text link.
-#' @example lds_scripture_url("1 Ne. 8:14–15, 18"); lds_scripture_url("1 Ne. 8:14–15, 18", FALSE)
+#' @examples lds_scripture_url("1 Ne. 8:14–15, 18"); lds_scripture_url("1 Ne. 8:14–15, 18", FALSE)
 #' @return a character string that is a url or text url.
 #' @export
 lds_scripture_url <- function(references, text_link = TRUE){
@@ -161,7 +174,7 @@ lds_scripture_url <- function(references, text_link = TRUE){
 #' @title lds_datatable
 #' @description Creates a DT::datatable object for a specific lds topic.
 #' @param x The output from `lds_topic()`
-#' @example lds_datatable(lds_topic("God, Omniscience of"))
+#' @examples lds_datatable(lds_topic("God, Omniscience of"))
 #' @return a datatable from the library DT
 #' @export
 lds_datatable <- function(x){

@@ -16,5 +16,8 @@ a character string with all text from the input verses
 Function retrieves the verses of specific topic from the topical guide on lds.org
 }
 \details{
-The function can handle `,`, `–`, or `-`. The `–` and `-` will pull all verses between the two numbers.
+The function can handle `,`, `–`, or `-`. The `–` and `-` will pull all verses referenced.
+}
+\examples{
+lds_expand_reference("1 Ne. 8:14–15, 18"); lds_expand_reference("1 Ne. 8:14-15, 18")
 }

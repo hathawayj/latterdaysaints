@@ -15,3 +15,6 @@ a datatable from the library DT
 \description{
 Creates a DT::datatable object for a specific lds topic.
 }
+\examples{
+lds_datatable(lds_topic("God, Omniscience of"))
+}

@@ -18,3 +18,6 @@ Function retrieves the verses of specific topic from the topical guide on lds.or
 \details{
 the reference column matches the values in `scriptures$verse_short_title`
 }
+\examples{
+lds_topic("God, Omniscience of")
+}
