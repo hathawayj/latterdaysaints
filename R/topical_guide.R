@@ -94,7 +94,6 @@ lds_topic <- function(topic){
 #' @details The function can handle `,`, `–`, or `-`. The `–` and `-` will keep the first verse reference.
 #' @export
 lds_verse_join <- function(reference = "1 Ne. 8:14–15, 18"){
-  if( is.na(reference) ) return(NA)
   reference %>% str_split(",|-|–") %>% map(head(1)) %>% unlist()
 }
 
