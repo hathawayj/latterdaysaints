@@ -176,8 +176,20 @@ lds_datatable <- function(x){
     dom = 'ltripB', buttons = c('copy', 'csv', 'excel', 'pdf', 'print'), lengthMenu = c(5, 10, 20, 100)), filter = "top", escape = FALSE)
 }
 
-
+## Load the Scriptures
 # scriptures <- read_csv("https://raw.githubusercontent.com/byuistats/M335/master/docs/data/lds-scriptures.csv?token=AF6YxPyvmohk2lj5cCXWUdE9zmoY8UTvks5cV0lgwA%3D%3D") %>%
 #   mutate(volume_lds_url = volume_lds_url %>% str_replace_all("bm", "bofm") %>% str_replace_all("dc", "dc-testament"))
 #
 #  usethis::use_data(scriptures, overwrite = TRUE)
+
+## Load the names
+#
+# bm_names <- rio::import("https://byuistats.github.io/M335/data/BoM_SaviorNames.rds")
+# bm_names$name[bm_names$reference == "Ether 4:7"] <- 'the Father of the heavens and of the earth, and all things that in them are'
+#
+# bm_names <- bm_names %>%
+#   group_by(name) %>%
+#   mutate(nchar = str_count(name), words = stringi::stri_stats_latex(name)["Words"]) %>%
+#   ungroup()
+#
+usethis::use_data(bm_names, overwrite = TRUE)
