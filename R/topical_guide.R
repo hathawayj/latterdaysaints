@@ -198,10 +198,11 @@ lds_datatable <- function(x){
 #
 # bm_names <- rio::import("https://byuistats.github.io/M335/data/BoM_SaviorNames.rds")
 # bm_names$name[bm_names$reference == "Ether 4:7"] <- 'the Father of the heavens and of the earth, and all things that in them are'
-#
+
 # bm_names <- bm_names %>%
 #   group_by(name) %>%
 #   mutate(nchar = str_count(name), words = stringi::stri_stats_latex(name)["Words"]) %>%
-#   ungroup()
+#   ungroup() %>%
+#   arrange(desc(nchar))
 #
-#usethis::use_data(bm_names, overwrite = TRUE)
+# usethis::use_data(bm_names, overwrite = TRUE)
