@@ -204,4 +204,4 @@ lds_datatable <- function(x){
 #   mutate(nchar = str_count(name), words = stringi::stri_stats_latex(name)["Words"]) %>%
 #   ungroup()
 #
-usethis::use_data(bm_names, overwrite = TRUE)
+#usethis::use_data(bm_names, overwrite = TRUE)
