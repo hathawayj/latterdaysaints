@@ -1,6 +1,6 @@
 Package: latterdaysaints
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.1
+Title: Parsing of scriptures and information from lds.org
+Version: 0.0.2
 Authors@R: 
     person(given = "J.",
            family = "Hathaway",
@@ -8,15 +8,16 @@ Authors@R:
            email = "j@jhathaway.io")
 Description: Functions and data related to the lds.org website and the standard works of The Church of Jesus Christ of Latter-Day Saints.
 License: What license it uses
-Depends: R (>= 3.5.0)
+Depends: 
+  R (>= 3.5.0),
+      dplyr,
+    stringr,
+    tidyr,
+    purrr,
+    fs,
+    DT,
+    rvest,
+    tibble
 Encoding: UTF-8
 LazyData: true
-Imports:
-  dplyr,
-  stringr,
-  tidyr,
-  purrr,
-  fs,
-  DT,
-  rvest
 RoxygenNote: 6.1.1

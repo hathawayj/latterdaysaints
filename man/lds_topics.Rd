@@ -12,3 +12,6 @@ lds_topics(letter)
 \description{
 Function retrieves the list of topics from the topical guide on lds.org
 }
+\examples{
+lds_topics("a")
+}
